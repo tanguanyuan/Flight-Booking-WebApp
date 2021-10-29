@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan.Aid</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet'>
+  <script src='https://eng1003.monash/libs/services.js'></script>
+
+  <style>
+  .material-icons {
+    font-family: 'Material Icons';
+    font-size: 24px;
+    display: inline-block;
+    line-height: 1;
+
+    -webkit-font-smoothing: antialiased;
+
+    text-rendering: optimizeLegibility;
+
+    -moz-osx-font-smoothing: grayscale;
+
+    font-feature-settings: 'liga';
+  }
+  </style>
+</head>
+
+<body style="background-image:url('images/plane3.jpg'); background-attachment: fixed; background-repeat: no-repeat;">
+  <header>
+
+    <div class="demo-layout-transparent mdl-layout mdl-js-layout" >
+      <div class="mdl-layout__drawer mdl-color--black">
+        <span class="mdl-layout-title"><img src="images/Plan.Aid.png" style="width:150px;height:150px;"></span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="mainPage.html" style="color: #ffffff;"><center>Main Page</center></a>
+          <a class="mdl-navigation__link" href="schedule.html" style="color: #ffffff;"><center>Schedule Flight</center></a>
+          <a class="mdl-navigation__link" href="fleetInfo.html" style="color: #ffffff;"><center>Fleet Info</center></a>
+          <a class="mdl-navigation__link" href="pastFlight.html" style="color: #ffffff;"><center>Past Flights</center></a>
+        </nav>
+      </div>
+
+      <style>
+          .box{
+              position: relative;
+              display: inline-block; /* Make the width of box same as image */
+          }
+          .box .text{
+              position: absolute;
+              z-index: 999;
+              margin: 0 auto;
+              left: 0;
+              right: 0;
+              text-align: center;
+              top: 20px; /* Adjust this value to move the positioned div up and down */
+              background: rgba(255, 193, 0, 0.5);
+              color: #fff;
+              width: 67.2%; /* Set the width of the positioned div */
+            }
+      </style>
+      <div class = "box">
+        <div class = "text">
+          <h1 style = "font-family: Lobster">Flight Information</h1>
+        </div>
+      </div>
+  </header>
+
+
+  <main class="mdl-layout__content;">
+    <table align="center" style="background-color: white;opacity:0.8;padding:150px; border-spacing: 107px ;">
+      <tr><td>
+
+        <h3 style="font-family:'Courier New';"id=airportCodeD1>MAL</h3>
+        <span style="font-family:'Courier New';"id=countryNameD1>Malaysia,Kuala Lumpur</span>
+        <span class="material-icons">flight_takeoff</span>
+        <br>
+        <span style="font-family:'Courier New';"id=temperatureD1>30 celcius</span>
+        <span class="material-icons"id=weatherD1>wb_sunny</span>
+
+
+      </td>
+
+        <td>
+
+            <h3 style="font-family:'Courier New';" id=airportCodeA1>KOR</h3>
+            <span style="font-family:'Courier New';" id=countryNameA1>Korea,Seoul</span>
+            <span class="material-icons">flight_land</span>
+            <br>
+            <span style="font-family:'Courier New';"id=temperatureA1>19 celcius</span>
+            <span class="material-icons" id=weatherA1>ac_unit</span>
+
+        </td></tr>
+
+        <tr><td>
+
+              <h3 style="font-family:'Courier New';">Departure</h3>
+             <span class="material-icons">today</span>
+             <span style="font-family:'Courier New';" id=dateD1>20 May 2020</span>
+             <br>
+             <span class="material-icons">schedule</span>
+             <span style="font-family:'Courier New';"id=timeD1>1000</span>
+             <br>
+             <span class="material-icons">trip_origin</span>
+             <span style="font-family:'Courier New';" id=cityNameD1>KUL</span>
+             <br>
+             <h5 style="font-family:'Courier New';" id=airportNameD1>KLIA</h5>
+             <br>
+             <h4>Where is it?</h4>
+             <span style="font-family:'Courier New';" id=airportDlocation>[138.530556, -34.945]</span>
+
+        </td>
+
+          <td>
+
+            <h3 style="font-family:'Courier New';">Arrival</h3>
+           <span class="material-icons">today</span>
+           <span style="font-family:'Courier New';" id=dateA1>20 May 2020</span>
+           <br>
+           <span class="material-icons">schedule</span>
+           <span style="font-family:'Courier New';"id=timeA1>1635</span>
+           <br>
+           <span class="material-icons">trip_origin</span>
+           <span style="font-family:'Courier New';"id=cityNameA1>ICN</span>
+           <br>
+           <h5 style="font-family:'Courier New';" id=airportNameA1>Incheon Airport</h5>
+           <h4>Where is it?</h4>
+           <span style="font-family:'Courier New';" id=airportAlocation1>[101.7086791, 2.7455307]</span>
+
+
+          </td>
+          </tr>
+
+          <tr><td>
+
+            <div>
+              <h3 style="font-family:'Courier New';">Plane </h3>
+              <h5 style="font-family:'Courier New';" id=planeName1>MUM Airways</h5>
+              <h5 style="font-family:'Courier New';"id=planeCode1>Code: M-YJBH</h5>
+              <h5 style="font-family:'Courier New';" id=Airline1>Type: BOEING A380</h5>
+
+            </td>
+            <td>
+              <h3 style="font-family:'Courier New';">Hints </h3>
+              <span class="material-icons">directions</span>
+              <span style="font-family:'Courier New';" id=distance1>4611KM</span>
+              <br>
+              <span class="material-icons">transfer_within_a_station</span>
+              <span style="font-family:'Courier New';" id=stopover1>2</span>
+              <br>
+              <span style="font-family:'Courier New';" id=stopcoords1>[138.530556, -34.945]
+ [101.70867919921875, 2.745530718801959]</span>
+
+
+          </td></tr>
+      </table>
+      <div class="mdl-grid">
+
+        <div class="mdl-cell mdl-cell--4-col"></div>
+        <style>
+        .button {
+          display: inline-block;
+          border-radius: 20px;
+          background-color: #0fdb32;
+          border: none;
+          color: #FFFFFF;
+          text-align: center;
+          font-size: 28px;
+          font-family: Kavoon;
+          padding: 20px;
+          width: 150px;
+          transition: all 0.5s;
+          cursor: pointer;
+          margin: 5px;
+        }
+
+        .button span {
+          cursor: pointer;
+          display: inline-block;
+          position: relative;
+          transition: 0.5s;
+        }
+
+        .button span:after {
+          content: '\00bb';
+          position: absolute;
+          opacity: 0;
+          top: 0;
+          right: -20px;
+          transition: 0.5s;
+        }
+
+        .button:hover span {
+          padding-right: 25px;
+        }
+
+        .button:hover span:after {
+          opacity: 1;
+          right: 0;
+        }
+        </style>
+        </div>
+        <div class="mdl-cell mdl-cell--6-col"></div>
+      </div>
+  </main>
+
+  <script src="JS/flightInfo.js"></script>
+</body>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan.Aid</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet'>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+    <script src='https://eng1003.monash/libs/services.js'></script>
+
+    <style>
+      .demo-layout-transparent {
+        background-image: url("images/background 4.jpg"); background-size: cover;
+      }
+      .demo-layout-transparent .mdl-layout__header,
+      .demo-layout-transparent .mdl-layout__drawer-button {
+          color: white;
+        }
+        #map{height: calc(70vh - 39px); width:calc(150vh - 39px);}
+
+
+        table.Table1{
+        padding: 10px;
+        border: 4px solid black;
+        opacity: 75%;
+        align-self: center;
+        }
+
+        i:hover {
+          filter: alpha(opacity=50);
+          opacity: .5;
+        }
+
+    </style>
+</head>
+
+<body onload = "LoadTable()">
+    <style type="text/css">
+
+		</style>
+
+    <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+      <div class="mdl-layout__drawer mdl-color--black">
+        <span class="mdl-layout-title"><img src="images/Plan.Aid.png" style="width:150px;height:150px;"></span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="mainPage.html" style="color: #ffffff;"><center>Main Page</center></a>
+          <a class="mdl-navigation__link" href="schedule.html" style="color: #ffffff;"><center>Schedule Flight</center></a>
+          <a class="mdl-navigation__link" href="fleetInfo.html" style="color: #ffffff;"><center>Fleet Info</center></a>
+          <a class="mdl-navigation__link" href="pastFlight.html" style="color: #ffffff;"><center>Past Flights</center></a>
+
+        </nav>
+      </div>
+
+      <main class="mdl-layout__content">
+        <div>
+          <h10>&nbsp</h10>
+        <img src="images/AirPlane.png" width="100" height="100" align="right" style="position:absolute;TOP:25px;RIGHT:170px;color:#002233;"  > <h1 style = "color:#002233;text-align:left ;font-family:'Lobster';">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Fleet Information</h1>
+        </div>
+        <div>
+            <table class = "Table1" border="1" style = "background-color:#e6f5ff; border-color:#002233" id = "fleetTable">
+              <tr>
+                <th style = "border-color:#002233;border-width: 3px;"><h3 style = "font-family:'Lucida Bright';">ID<h3><i class='far fa-caret-square-down' style='font-size:36px;' onclick = "sortTableNum(0)"></i></th>
+                <th style = "border-color:#002233;border-width: 3px;"><h3 style = "font-family:'Lucida Bright';">Registration Number<h3><i class='far fa-caret-square-down' style='font-size:36px' onclick = "sortTable(1)"></i></th>
+                <th style = "border-color:#002233;border-width: 3px;"><h3 style = "font-family:'Lucida Bright';">Location<h3><i class='far fa-caret-square-down' style='font-size:36px' onclick = "sortTable(2)"></i></th>
+                <th style = "border-color:#002233;border-width: 3px;"><h3 style = "font-family:'Lucida Bright';">Airline<h3><i class='far fa-caret-square-down' style='font-size:36px' onclick = "sortTable(3)"></i></th>
+                <th style = "border-color:#002233;border-width: 3px;"><h3 style = "font-family:'Lucida Bright';">Range(km)<h3><i class='far fa-caret-square-down' style='font-size:36px' onclick = "sortTable(4)"></i></th>
+                <th style = "border-color:#002233;border-width: 3px;"><h3 style = "font-family:'Lucida Bright';">Average Speed(km/h)<h3><i class='far fa-caret-square-down' style='font-size:36px' onclick = "sortTable(5)"></i></th>
+                <th style = "border-color:#002233;border-width: 3px;"><h3 style = "font-family:'Lucida Bright';">Plane Type<h3><i class='far fa-caret-square-down' style='font-size:36px' onclick = "sortTable(6)"></i></th>
+                <th style = "border-color:#002233;border-width: 3px;"><h3 style = "font-family:'Lucida Bright';">Status<h3><i class='far fa-caret-square-down' style='font-size:36px' onclick = "sortTable(7)"></i></th>
+              </tr>
+              <tr id = "tr1" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr2" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr3" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr4" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr5" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr6" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr7" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr8" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr9" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr10" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr11" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr12" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr13" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr14" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr15" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr16" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr17" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr18" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr19" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr20" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr21" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr22" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr23" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr24" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr25" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr26" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr27" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr28" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+              <tr id = "tr29" style = "text-align:center ;font-family:'Lucida Bright';"></tr>
+
+          </table>
+      </div>
+      </main>
+    </div>
+  </body>
+  <script src = "JS/fleetInfo.js">
+  </script>
+</html>

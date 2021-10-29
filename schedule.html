@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan.Aid</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet'>
+  <script src='https://eng1003.monash/libs/services.js'></script>
+
+  <style>
+  .material-icons {
+    font-family: 'Material Icons';
+    font-size: 24px;
+    display: inline-block;
+    line-height: 1;
+
+    -webkit-font-smoothing: antialiased;
+
+    text-rendering: optimizeLegibility;
+
+    -moz-osx-font-smoothing: grayscale;
+
+    font-feature-settings: 'liga';
+  }
+  .mdl-button{
+    width: 80px;
+    height:40px;
+  }
+  #map{
+    height: calc(70vh - 40px);
+    width:calc(70vh - 20px);
+    border-radius:15px;
+    border-width:5px;
+    border-color:#002233
+  }
+  .marker {
+    background-size: cover;
+    border: none;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+  }
+  #Center {
+    text-align: center;
+  }
+  </style>
+</head>
+
+<body style="background-image:url('images/background.jpg'); background-size: cover; background-attachment: fixed; background-image: no-repeat;">
+  <header>
+    <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+      <div class="mdl-layout__drawer mdl-color--black">
+        <span class="mdl-layout-title"><img src="images/Plan.Aid.png" style="width:150px;height:150px;"></span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="mainPage.html" style="color: #ffffff;"><center>Main Page</center></a>
+          <a class="mdl-navigation__link" href="schedule.html" style="color: #ffffff;"><center>Schedule Flight</center></a>
+          <a class="mdl-navigation__link" href="fleetInfo.html" style="color: #ffffff;"><center>Fleet Info</center></a>
+          <a class="mdl-navigation__link" href="pastFlight.html" style="color: #ffffff;"><center>Past Flights</center></a>
+        </nav>
+      </div>
+
+    <h1 style="font-family:Lobster;"><center>Schedule a Flight</center></h1>
+  </header>
+
+  <main class="mdl-layout__content;">
+
+  </br></br></br></br></br></br></br>
+    <table align = "center" style = "background-color: white; opacity: 0.9">
+      <tr>
+        <td>
+          &nbsp
+          <div class="mdl-textfield mdl-js-textfield">
+            <h5 style="font-family:'Courier New';">Departure Date: </h5>
+            <input class="mdl-textfield__input" type="date" id="departDate">
+          </div>
+        </td>
+
+        <td>
+          &nbsp
+          <div class="mdl-textfield mdl-js-textfield">
+            <h5 style="font-family:'Courier New';">Departure Time: </h5>
+            <input class="mdl-textfield__input" type="time" id="departTime">
+          </div>
+        </td>
+
+        <td rowspan="6" colspan="4">
+          <div id = "map" style = "z-index: 1"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          &nbsp&nbsp
+          <div class="mdl-textfield mdl-js-textfield getmdl-select">
+            <h5 style="font-family:'Courier New';">Origin Country: </h5>
+            <select class="mdl-textfield__input" id="originCountry" onchange="getOriginCountryChosen()">
+              <option default>Select a Country</option>
+            </select>
+          </div>
+            <span class="material-icons">flight_takeoff</span>
+        </td>
+        <td>
+          &nbsp&nbsp
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
+            <h5 style="font-family:'Courier New';">Origin Airport: </h5>
+            <select class="mdl-textfield__input" id="originAirport" onchange="getAirplaneChosen()">
+              <option default>Select an Airport</option>
+            </select>
+          </div>
+          <span class="material-icons">flight_takeoff</span>
+        </td>
+       <!--<td>
+          &nbsp&nbsp
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
+            <h5 style="font-family:'Courier New';">Destination Country: </h5>
+            <select class="mdl-textfield__input" id="destinationCountry" onchange="getDestinationCountryChosen()">
+              <option default>Select a Country</option>
+            </select>
+          </div>
+            <span class="material-icons">flight_land</span>
+        </td>-->
+      </tr>
+      <tr>
+        <td>
+          &nbsp&nbsp
+          <div class="mdl-textfield mdl-js-textfield">
+          <h5 style="font-family:'Courier New';">  Available Airplanes: </h5>
+          <div id = "availableAirplanes">
+            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th id = "Center">Registration</th>
+                  <th id = "Center">Airline</th>
+                  <th id = "Center">Location</th>
+                  <th id = "Center">Range</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id = "Center">
+                    <input type = "radio" id = "plane1" name = "plane" value = "0" onclick = "selectPlane()">
+                    <label for="plane1"></label>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Registration1"></div>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Airline1"></div>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Location1"></div>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Range1"></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td id = "Center">
+                    <input type = "radio" id = "plane2" name = "plane" value = "1" onclick = "selectPlane()">
+                    <label for="plane2"></label>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Registration2"></div>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Airline2"></div>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Location2"></div>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Range2"></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type = "radio" id = "plane3" name = "plane" value = "2" onclick = "selectPlane()">
+                    <label for="plane3"></label>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Registration3"></div>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Airline3"></div>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Location3"></div>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Range3"></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type = "radio" id = "plane4" name = "plane" value = "3" onclick = "selectPlane()">
+                    <label for="plane4"></label>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Registration4"></div>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Airline4"></div>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Location4"></div>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Range4"></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type = "radio" id = "plane5" name = "plane" value = "4" onclick = "selectPlane()">
+                    <label for="plane5"></label>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Registration5"></div>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Airline5"></div>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Location5"></div>
+                  </td>
+                  <td id = "Center">
+                    <div id = "Range5"></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+        </td>
+
+        <!--<td>
+          &nbsp&nbsp
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
+            <h5 style="font-family:'Courier New';">Destination Airport: </h5>
+            <select class="mdl-textfield__input" id="destinationAirport">
+              <option default>Select an Airport</option>
+            </select>
+          </div>
+          <span class="material-icons">flight_land</span>
+        </td>-->
+      </tr>
+      <!--<tr>
+        <td>
+          &nbsp&nbsp
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
+            <h5 style="font-family:'Courier New';">Airplane Type: </h5>
+            <select class="mdl-textfield__input" id="airplaneType">
+              <option default>Select an Airplane</option>
+            </select>
+          </div>
+        </td>
+      </tr>-->
+    </table>
+  </div>
+
+      </br>
+      <center><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="confirm()">Next</button></center>
+  </main>
+</body>
+<!--<script src="map.js"></script>-->
+<script src="JS/schedule1.js"></script>
+</html>

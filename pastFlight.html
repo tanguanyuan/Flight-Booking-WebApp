@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan.Aid</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+    <style>
+      .demo-layout-transparent {
+        background-image: url("images/background 4.jpg"); background-size: cover;
+      }
+      .demo-layout-transparent .mdl-layout__header,
+      .demo-layout-transparent .mdl-layout__drawer-button {
+          color: white;
+        }
+        #map{height: calc(70vh - 39px); width:calc(150vh - 39px);}
+
+
+        #Delete:hover {
+          filter: alpha(opacity=50);
+          opacity: .5;
+        }
+        /* div.table{
+          overflow:scroll;
+        } */
+
+    </style>
+</head>
+
+<body>
+    <style type="text/css">
+
+		</style>
+
+    <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+      <div class="mdl-layout__drawer mdl-color--black">
+        <span class="mdl-layout-title"><img src="images/Plan.Aid.png" style="width:150px;height:150px;"></span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="mainPage.html" style="color: #ffffff;"><center>Main Page</center></a>
+          <a class="mdl-navigation__link" href="schedule.html" style="color: #ffffff;"><center>Schedule Flight</center></a>
+          <a class="mdl-navigation__link" href="fleetInfo.html" style="color: #ffffff;"><center>Fleet Info</center></a>
+          <a class="mdl-navigation__link" href="pastFlight.html" style="color: #ffffff;"><center>Past Flights</center></a>
+        </nav>
+      </div>
+
+      <main class="mdl-layout__content">
+        <div>
+          <h10>&nbsp</h10>
+          <img src="images/AirPlane.png" width="100" height="100" align="right" style="position:absolute;TOP:25px;RIGHT:170px;color:#002233;"><h1 style = "color:#002233;text-align:left ;font-family:'Lobster';">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Past Flights</h1>
+        </div>
+
+        <div style = "overflow-y:auto">
+          <!-- Table 1 -->
+          <div style = "border: 4px solid #002233;border-radius:10px;background:#e6f5ff;width:80%;position:relative;left:120px; opacity:75%">
+            <table align="center" style="background-color:#e6f5ff;">
+                <tr><td> <h3 id = "planenumber1">Plane Number: 2A13MY <h3></td><td></td><td><h3 id = "departuredate1">Departure Date: 8, May 2020(11.30pm)<h3></td><td></td></tr>
+                <tr><td> <h3 id = "airline1">Airline: Firfly<h3></td><td></td><td><h3 id = "arrivaldate1">Arrival Date: 9, May 2020(3.00am)<h3></td><td></td></tr>
+                <tr><td> <h1 style = "text-align:center" id = "startlocation1">MAL<h1></td><td><img src="images/Arrow.png" width="70" height="70" style = "position:relative;left:100px"></td><td><h1 style = "text-align:center" id = "endlocation1"> HKG <h1></td><td><img src="images/Delete.png" id = "Delete" style = width="70" height="70"> </td></tr>
+            </table>
+          </div>
+          <!-- Table 2 -->
+          <div style = "border: 4px solid #002233;border-radius:10px;background:#e6f5ff;width:80%;position:relative;left:120px; opacity:75%">
+            <table align="center" style="background-color:#e6f5ff">
+              <tr><td> <h3 id = "planenumber2">Plane Number: 2A13MY <h3></td><td></td><td><h3 id = "departuredate2">Departure Date: 8, May 2020(11.30pm)<h3></td><td></td></tr>
+              <tr><td> <h3 id = "airline2">Airline: Firfly<h3></td><td></td><td><h3 id = "arrivaldate2">Arrival Date: 9, May 2020(3.00am)<h3></td><td></td></tr>
+              <tr><td> <h1 style = "text-align:center" id = "startlocation2">MAL<h1></td><td><img src="images/Arrow.png" width="70" height="70" style = "position:relative;left:100px"></td><td><h1 style = "text-align:center" id = "endlocation2"> HKG <h1></td><td><img src="images/Delete.png" id = "Delete" style = width="70" height="70"> </td></tr>
+            </table>
+          </div>
+          <!-- Table 3 -->
+          <div style = "border: 4px solid #002233;border-radius:10px;background:#e6f5ff;width:80%;position:relative;left:120px; opacity:75%">
+            <table align="center" style="background-color:#e6f5ff">
+              <tr><td> <h3 id = "planenumber3">Plane Number: 2A13MY <h3></td><td></td><td><h3 id = "departuredate3">Departure Date: 8, May 2020(11.30pm)<h3></td><td></td></tr>
+              <tr><td> <h3 id = "airline3">Airline: Firfly<h3></td><td></td><td><h3 id = "arrivaldate3">Arrival Date: 9, May 2020(3.00am)<h3></td><td></td></tr>
+              <tr><td> <h1 style = "text-align:center" id = "startlocation3">MAL<h1></td><td><img src="images/Arrow.png" width="70" height="70" style = "position:relative;left:100px"></td><td><h1 style = "text-align:center" id = "endlocation3"> HKG <h1></td><td><img src="images/Delete.png" id = "Delete" style = width="70" height="70"> </td></tr>
+            </table>
+          </div>
+          <!-- Table 4 -->
+          <div style = "border: 4px solid #002233;border-radius:10px;background:#e6f5ff;width:80%;position:relative;left:120px; opacity:75%">
+            <table align="center" style="background-color:#e6f5ff">
+              <tr><td> <h3 id = "planenumber4">Plane Number: 2A13MY <h3></td><td></td><td><h3 id = "departuredate4">Departure Date: 8, May 2020(11.30pm)<h3></td><td></td></tr>
+              <tr><td> <h3 id = "airline4">Airline: Firfly<h3></td><td></td><td><h3 id = "arrivaldate4">Arrival Date: 9, May 2020(3.00am)<h3></td><td></td></tr>
+              <tr><td> <h1 style = "text-align:center" id = "startlocation4">MAL<h1></td><td><img src="images/Arrow.png" width="70" height="70" style = "position:relative;left:100px"></td><td><h1 style = "text-align:center" id = "endlocation4"> HKG <h1></td><td><img src="images/Delete.png" id = "Delete" style = width="70" height="70"> </td></tr>
+            </table>
+          </div>
+          <!-- Table 5 -->
+          <div style = "border: 4px solid #002233;border-radius:10px;background:#e6f5ff;width:80%;position:relative;left:120px; opacity:75%">
+            <table align="center" style="background-color:#e6f5ff">
+              <tr><td> <h3 id = "planenumber5">Plane Number: 2A13MY <h3></td><td></td><td><h3 id = "departuredate5">Departure Date: 8, May 2020(11.30pm)<h3></td><td></td></tr>
+              <tr><td> <h3 id = "airline5">Airline: Firfly<h3></td><td></td><td><h3 id = "arrivaldate5">Arrival Date: 9, May 2020(3.00am)<h3></td><td></td></tr>
+              <tr><td> <h1 style = "text-align:center" id = "startlocation5">MAL<h1></td><td><img src="images/Arrow.png" width="70" height="70" style = "position:relative;left:100px"></td><td><h1 style = "text-align:center" id = "endlocation5"> HKG <h1></td><td><img src="images/Delete.png" id = "Delete" style = width="70" height="70"> </td></tr>            
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+
+  <script></script>
+</html>
